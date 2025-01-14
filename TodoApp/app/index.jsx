@@ -93,8 +93,11 @@ export default function Index() {
           {item.title}
         </Text>
       </Pressable>
-      <Pressable onPress={() => removeTodo(item.id)}>
-        <MaterialCommunityIcons name="delete-circle" size={36} color="#f00" selectable={undefined} />
+      <Pressable
+        onPress={() => removeTodo(item.id)}
+        style={{ padding: 14, backgroundColor: '#ff3434' }}
+      >
+        <MaterialCommunityIcons name="delete" size={30} color="white" selectable={undefined} />
       </Pressable>
     </View>
   )
@@ -172,20 +175,23 @@ function createStyles(theme, colorScheme) {
       color: colorScheme === 'dark' ? 'black' : 'white',
     },
     todoItem: {
+      flex: 1,
       flexDirection: 'row',
       alignItems: 'center',
       justifyContent: 'space-between',
-      gap: 4,
-      padding: 10,
-      borderBottomColor: 'gray',
-      borderBottomWidth: 1,
-      width: '100%',
+      gap: 10,
+      paddingLeft: 10,
+      margin: 6,
+      borderRadius: 4,
+      borderWidth: 1,
+      borderColor: 'royalblue',
+      width: '94%',
       maxWidth: 1024,
-      marginHorizontal: 'auto',
+      marginHorizontal: 'auto', // center item
       pointerEvents: 'auto',
+      backgroundColor: '#3e3e3e',
     },
     todoText: {
-      flex: 1,
       fontSize: 18,
       fontFamily: 'Inter_500Medium',
       color: theme.text,
