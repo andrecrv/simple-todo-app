@@ -1,4 +1,6 @@
-import { Text, View, TextInput, Pressable, StyleSheet, FlatList } from "react-native";
+import { Text, View, TextInput, Pressable, StyleSheet, FlatList, /*CheckBox*/ } from "react-native";
+//import CheckBox from "@react-native-community/checkbox";
+import { Checkbox } from "react-native-paper";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { useState, useContext, useEffect } from "react";
 import { ThemeContext } from "@/context/ThemeContext";
@@ -16,6 +18,7 @@ import { data } from "@/data/todos"
 export default function Index() {
   const [todos, setTodos] = useState([])
   const [text, setText] = useState('')
+  //const [isSelected, setSelection] = useState(false);
   const { colorScheme, setColorScheme, theme } = useContext(ThemeContext)
   const router = useRouter()
 
@@ -84,17 +87,29 @@ export default function Index() {
   const renderItem = ({ item }) => (
     <View style={styles.todoItem}>
       <Pressable
-        onPress={() => handlePress(item.id)}
-        onLongPress={() => toggleTodo(item.id)}
+        key={item.id}
+        style={[styles.checkbox, item.completed && styles.completedCheckbox]}
       >
-        <Text
-          style={[styles.todoText, item.completed && styles.completedText]}
-        >
+        <Checkbox
+          status={item.completed ? 'checked' : 'unchecked'}
+          onPress={() => toggleTodo(item.id)}
+          color={item.completed ? '#63ae71' : '#b1b1b1'}
+        />
+      </Pressable>
+      <Pressable
+        onPress={() => handlePress(item.id)}
+        /*onLongPress={() => toggleTodo(item.id)}*/
+        style={styles.todoTextContainer}
+      >
+        <Text style={styles.todoText} >
           {item.title}
         </Text>
       </Pressable>
-      <Pressable onPress={() => removeTodo(item.id)}>
-        <MaterialCommunityIcons name="delete-circle" size={36} color="#f00" selectable={undefined} />
+      <Pressable
+        onPress={() => removeTodo(item.id)}
+        style={styles.deleteButton}
+      >
+        <MaterialCommunityIcons name="delete" size={24} color="white" selectable={undefined} />
       </Pressable>
     </View>
   )
@@ -104,7 +119,7 @@ export default function Index() {
       <View style={styles.inputContainer}>
         <TextInput
           style={styles.input}
-          maxLength={30}
+          maxLength={26}
           placeholder="Add a new todo"
           placeholderTextColor="gray"
           value={text}
@@ -172,27 +187,57 @@ function createStyles(theme, colorScheme) {
       color: colorScheme === 'dark' ? 'black' : 'white',
     },
     todoItem: {
+      flex: 1,
       flexDirection: 'row',
-      alignItems: 'center',
+      //alignItems: 'center',
       justifyContent: 'space-between',
-      gap: 4,
-      padding: 10,
-      borderBottomColor: 'gray',
-      borderBottomWidth: 1,
-      width: '100%',
+      //gap: 10,
+      margin: 6,
+      borderRadius: 4,
+      //borderWidth: 1,
+      //borderColor: 'royalblue',
+      width: '94%',
       maxWidth: 1024,
-      marginHorizontal: 'auto',
+      marginHorizontal: 'auto', // center item
+      overflow: 'hidden',
       pointerEvents: 'auto',
+      //backgroundColor: '#3e3e3e',
+    },
+    checkbox: {
+      //flex: 1,
+      //alignItems: 'center',
+      //justifyContent: 'center',
+      padding: 10,
+      backgroundColor: '#5b5b5b',
+      //borderStartStartRadius: 4,
+      //borderEndStartRadius: 4,
+    },
+    completedCheckbox: {
+      backgroundColor: '#76ff8f',
+    },
+    todoTextContainer: {
+      flexGrow: 1,
+      //flexShrink: 1,
+      //flexWrap: 'nowrap',
+      justifyContent: 'center',
+      paddingHorizontal: 10,
+      backgroundColor: '#3e3e3e',
     },
     todoText: {
-      flex: 1,
-      fontSize: 18,
+      //flexShrink: 1,
+      //flexWrap: 'wrap',
+      fontSize: 14,
       fontFamily: 'Inter_500Medium',
       color: theme.text,
     },
     completedText: {
       textDecorationLine: 'line-through',
-      color: 'gray',
-    }
+      color: '#7d7d7d',
+    },
+    deleteButton: {
+      padding: 16,
+      justifyContent: 'center',
+      backgroundColor: '#ff3434'
+    },
   })
 }

@@ -71,7 +71,7 @@ export default function EditScreen() {
             <View style={styles.inputContainer}>
                 <TextInput
                     style={styles.input}
-                    maxLength={30}
+                    maxLength={26}
                     placeholder="Edit todo"
                     placeholderTextColor="gray"
                     value={todo?.title || ''} // chain -> if todo is undefined or empty, value will be ''

@@ -1,3 +1,5 @@
+// Theme Mode Colors
+
 export const Colors = {
   light: {
     text: 'black',
@@ -7,7 +9,7 @@ export const Colors = {
   },
   dark: {
     text: 'white',
-    background: 'black',
+    background: '#2e2e2e',
     icon: 'red',
     button: 'white',
   },
