@@ -11,14 +11,14 @@ import Animated, { LinearTransition } from "react-native-reanimated";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { StatusBar } from "expo-status-bar";
 import { useRouter } from "expo-router";
-import { Octicons } from '@expo/vector-icons'
+import { Octicons, FontAwesome } from '@expo/vector-icons'
 
 import { data } from "@/data/todos"
 
 export default function Index() {
   const [todos, setTodos] = useState([])
   const [text, setText] = useState('')
-  //const [isSelected, setSelection] = useState(false);
+  const [inputFocus, setInputFocus] = useState(false)
   const { colorScheme, setColorScheme, theme } = useContext(ThemeContext)
   const router = useRouter()
 
@@ -118,21 +118,24 @@ export default function Index() {
     <SafeAreaView style={styles.container}>
       <View style={styles.inputContainer}>
         <TextInput
-          style={styles.input}
+          style={[styles.input, inputFocus && styles.focusedInput]}
           maxLength={26}
           placeholder="Add a new todo"
           placeholderTextColor="gray"
           value={text}
           onChangeText={setText}
+          onFocus={setInputFocus}
+          onBlur={() => setInputFocus(false)}
         />
         <Pressable onPress={addTodo} style={styles.addButton}>
-          <Text style={styles.addButtonText}>Add</Text>
+          {/*<Text style={styles.addButtonText}>Add</Text>*/}
+          <FontAwesome name="plus" size={18} color="white" />
         </Pressable>
         <Pressable
           onPress={() => setColorScheme(colorScheme === 'light' ? 'dark' : 'light')}
           style={{ marginLeft: 10 }}>
 
-          <Octicons name={colorScheme === 'dark' ? "moon" : "sun"} size={36} color={theme.text} selectable={undefined} style={{ width: 36 }} />
+          <Octicons name={colorScheme === 'dark' ? "moon" : "sun"} size={32} color={theme.text} selectable={undefined} style={{ width: 36 }} />
 
         </Pressable>
       </View>
@@ -167,23 +170,25 @@ function createStyles(theme, colorScheme) {
     },
     input: {
       flex: 1,
-      borderColor: 'gray',
-      borderWidth: 1,
-      borderRadius: 5,
+      borderRadius: 4,
       padding: 10,
       marginRight: 10,
       fontSize: 18,
       fontFamily: 'Inter_500Medium',
       minWidth: 0,
       color: theme.text,
+      backgroundColor: '#242424',
+    },
+    focusedInput: {
+      backgroundColor: '#1f1f1f',
     },
     addButton: {
-      backgroundColor: theme.button,
-      borderRadius: 5,
-      padding: 10,
+      backgroundColor: '#42ff91',
+      borderRadius: 4,
+      padding: 12,
     },
     addButtonText: {
-      fontSize: 18,
+      fontSize: 16,
       color: colorScheme === 'dark' ? 'black' : 'white',
     },
     todoItem: {
