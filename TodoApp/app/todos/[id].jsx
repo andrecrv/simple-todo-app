@@ -6,13 +6,14 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { ThemeContext } from "@/context/ThemeContext";
 import { StatusBar } from "expo-status-bar";
 import { Inter_500Medium, useFonts } from "@expo-google-fonts/inter";
-import { Octicons } from "@expo/vector-icons";
+import { Octicons, FontAwesome } from "@expo/vector-icons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { useRouter } from "expo-router";
 
 export default function EditScreen() {
     const { id } = useLocalSearchParams()
     const [todo, setTodo] = useState({})
+    const [inputFocus, setInputFocus] = useState(false)
     const { colorScheme, setColorScheme, theme } = useContext(ThemeContext)
     const router = useRouter()
 
@@ -70,18 +71,20 @@ export default function EditScreen() {
         <SafeAreaView style={styles.container}>
             <View style={styles.inputContainer}>
                 <TextInput
-                    style={styles.input}
+                    style={[styles.input, inputFocus && styles.focusedInput]}
                     maxLength={26}
                     placeholder="Edit todo"
                     placeholderTextColor="gray"
                     value={todo?.title || ''} // chain -> if todo is undefined or empty, value will be ''
                     onChangeText={(text) => setTodo(prev => ({ ...prev, title: text }))} // prev -> previous todo state
+                    onFocus={setInputFocus}
+                    onBlur={() => setInputFocus(false)}
                 />
                 <Pressable
                     onPress={() => setColorScheme(colorScheme === 'light' ? 'dark' : 'light')}
                     style={{ marginLeft: 10 }}>
 
-                    <Octicons name={colorScheme === 'dark' ? "moon" : "sun"} size={36} color={theme.text} selectable={undefined} style={{ width: 36 }} />
+                    <Octicons name={colorScheme === 'dark' ? "moon" : "sun"} size={32} color={theme.text} selectable={undefined} style={{ width: 36 }} />
 
                 </Pressable>
             </View>
@@ -90,13 +93,15 @@ export default function EditScreen() {
                     onPress={handleSave}
                     style={styles.saveButton}
                 >
-                    <Text style={styles.saveButtonText}>Save</Text>
+                    {/*<Text style={styles.saveButtonText}>Save</Text>*/}
+                    <FontAwesome name="check" size={18} color="white" />
                 </Pressable>
                 <Pressable
                     onPress={() => router.push('/')}
-                    style={[styles.saveButton, { backgroundColor: 'red' }]}
+                    style={[styles.saveButton, { backgroundColor: '#ff7c54' }]}
                 >
-                    <Text style={[styles.saveButtonText, { color: 'white' }]}>Cancel</Text>
+                    {/*<Text style={[styles.saveButtonText, { color: 'white' }]}>Cancel</Text>*/}
+                    <FontAwesome name="close" size={19} color="white" />
                 </Pressable>
             </View>
             <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
@@ -123,20 +128,22 @@ function createStyles(theme, colorScheme) {
         },
         input: {
             flex: 1,
-            borderColor: 'gray',
-            borderWidth: 1,
-            borderRadius: 5,
+            borderRadius: 4,
             padding: 10,
             marginRight: 10,
             fontSize: 18,
             fontFamily: 'Inter_500Medium',
             minWidth: 0,
             color: theme.text,
+            backgroundColor: '#242424',
+        },
+        focusedInput: {
+            backgroundColor: '#1f1f1f',
         },
         saveButton: {
-            backgroundColor: theme.button,
-            borderRadius: 5,
-            padding: 10,
+            backgroundColor: '#62ff84',
+            borderRadius: 4,
+            padding: 12,
         },
         saveButtonText: {
             fontSize: 18,
