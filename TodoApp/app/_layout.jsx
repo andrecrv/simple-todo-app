@@ -8,8 +8,9 @@ export default function RootLayout() {
     <ThemeProvider>
       <SafeAreaProvider>
         <Stack screenOptions={{ headerShown: false }}>
-          <Stack.Screen name="index" />
+          <Stack.Screen name="(tabs)" />
           <Stack.Screen name="todos/[id]" />
+          <Stack.Screen name="+not-found" />
         </Stack>
       </SafeAreaProvider>
     </ThemeProvider >
