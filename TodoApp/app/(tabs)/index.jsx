@@ -131,13 +131,13 @@ export default function Index() {
           {/*<Text style={styles.addButtonText}>Add</Text>*/}
           <FontAwesome name="plus" size={18} color="white" />
         </Pressable>
-        <Pressable
+        {/* <Pressable
           onPress={() => setColorScheme(colorScheme === 'light' ? 'dark' : 'light')}
           style={{ marginLeft: 10 }}>
 
           <Octicons name={colorScheme === 'dark' ? "moon" : "sun"} size={32} color={theme.text} selectable={undefined} style={{ width: 36 }} />
 
-        </Pressable>
+        </Pressable> */}
       </View>
       <Animated.FlatList
         data={todos}
