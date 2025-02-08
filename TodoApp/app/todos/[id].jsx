@@ -80,13 +80,13 @@ export default function EditScreen() {
                     onFocus={setInputFocus}
                     onBlur={() => setInputFocus(false)}
                 />
-                <Pressable
+                {/* <Pressable
                     onPress={() => setColorScheme(colorScheme === 'light' ? 'dark' : 'light')}
                     style={{ marginLeft: 10 }}>
 
                     <Octicons name={colorScheme === 'dark' ? "moon" : "sun"} size={32} color={theme.text} selectable={undefined} style={{ width: 36 }} />
 
-                </Pressable>
+                </Pressable> */}
             </View>
             <View style={styles.inputContainer}>
                 <Pressable
@@ -114,7 +114,7 @@ function createStyles(theme, colorScheme) {
         container: {
             flex: 1,
             width: '100%',
-            backgroundColor: theme.background,
+            backgroundColor: colorScheme === 'dark' ? '#2e2e2e' : 'white',
         },
         inputContainer: {
             flexDirection: 'row',

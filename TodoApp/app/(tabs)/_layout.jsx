@@ -39,7 +39,7 @@ export default function RootLayout() {
         />
         <Tabs.Screen name="settings"
           options={{
-            //headerShown: false,
+            headerShown: false,
             tabBarIcon: ({ color, focused }) => (
               <FontAwesome
                 name="gear"
