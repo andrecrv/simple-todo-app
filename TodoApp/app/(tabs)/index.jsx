@@ -93,7 +93,7 @@ export default function Index() {
         <Checkbox
           status={item.completed ? 'checked' : 'unchecked'}
           onPress={() => toggleTodo(item.id)}
-          color={item.completed ? '#63ae71' : '#b1b1b1'}
+          color={item.completed ? '#63ae71' : '#b1b1b1'} // color prop applies only to fill and ripple effect
         />
       </Pressable>
       <Pressable
@@ -161,35 +161,34 @@ function createStyles(theme, colorScheme) {
     inputContainer: {
       flexDirection: 'row',
       alignItems: 'center',
-      marginBottom: 10,
-      padding: 10,
+      //borderWidth: 1,
+      //borderColor: 'red',
+      padding: 12,
+      marginBottom: 2,
       width: '100%',
       maxWidth: 1024,
       marginHorizontal: 'auto',
       pointerEvents: 'auto',
+      backgroundColor: theme.background,
     },
     input: {
       flex: 1,
       borderRadius: 4,
       padding: 10,
       marginRight: 10,
-      fontSize: 18,
+      fontSize: 16,
       fontFamily: 'Inter_500Medium',
       minWidth: 0,
       color: theme.text,
-      backgroundColor: '#242424',
+      backgroundColor: colorScheme === 'dark' ? '#282828' : '#f2f2f2',
     },
     focusedInput: {
-      backgroundColor: '#1f1f1f',
+      backgroundColor: colorScheme === 'dark' ? '#1f1f1f' : '#d6d6d6',
     },
     addButton: {
-      backgroundColor: '#42ff91',
+      backgroundColor: '#76ff8f',
       borderRadius: 4,
       padding: 12,
-    },
-    addButtonText: {
-      fontSize: 16,
-      color: colorScheme === 'dark' ? 'black' : 'white',
     },
     todoItem: {
       flex: 1,
@@ -212,8 +211,8 @@ function createStyles(theme, colorScheme) {
       //flex: 1,
       //alignItems: 'center',
       //justifyContent: 'center',
-      padding: 10,
-      backgroundColor: '#5b5b5b',
+      padding: 8,
+      backgroundColor: colorScheme === 'dark' ? '#5b5b5b' : '#dcdcdc',
       //borderStartStartRadius: 4,
       //borderEndStartRadius: 4,
     },
@@ -226,7 +225,7 @@ function createStyles(theme, colorScheme) {
       //flexWrap: 'nowrap',
       justifyContent: 'center',
       paddingHorizontal: 10,
-      backgroundColor: '#3e3e3e',
+      backgroundColor: colorScheme === 'dark' ? '#3e3e3e' : '#efefef',
     },
     todoText: {
       //flexShrink: 1,
@@ -240,9 +239,9 @@ function createStyles(theme, colorScheme) {
       color: '#7d7d7d',
     },
     deleteButton: {
-      padding: 16,
+      padding: 14,
       justifyContent: 'center',
-      backgroundColor: '#ff3434'
+      backgroundColor: '#ff3d3d'
     },
   })
 }

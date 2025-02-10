@@ -131,14 +131,14 @@ function createStyles(theme, colorScheme) {
             borderRadius: 4,
             padding: 10,
             marginRight: 10,
-            fontSize: 18,
+            fontSize: 16,
             fontFamily: 'Inter_500Medium',
             minWidth: 0,
             color: theme.text,
-            backgroundColor: '#242424',
+            backgroundColor: colorScheme === 'dark' ? '#282828' : '#f2f2f2',
         },
         focusedInput: {
-            backgroundColor: '#1f1f1f',
+            backgroundColor: colorScheme === 'dark' ? '#1f1f1f' : '#d6d6d6',
         },
         saveButton: {
             backgroundColor: '#62ff84',
