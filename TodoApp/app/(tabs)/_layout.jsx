@@ -1,7 +1,12 @@
 import { Tabs } from "expo-router";
 import { FontAwesome } from "@expo/vector-icons";
 
+import { ThemeContext } from "@/context/ThemeContext";
+import { useContext } from "react";
+
 export default function RootLayout() {
+  const { colorScheme } = useContext(ThemeContext);
+
   return (
     <Tabs
       screenOptions={{
@@ -9,7 +14,7 @@ export default function RootLayout() {
         tabBarActiveTintColor: '#FFA001',
         tabBarInactiveTintColor: '#CDCDE0',
         tabBarStyle: {
-          backgroundColor: '#1e1e1e',
+          backgroundColor: colorScheme === 'dark' ? '#1f1f1f' : 'white',
           borderTopWidth: 0,
           height: 64, /* px */
         },
