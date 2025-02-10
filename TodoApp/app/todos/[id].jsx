@@ -69,6 +69,10 @@ export default function EditScreen() {
 
     return (
         <SafeAreaView style={styles.container}>
+            <View style={styles.headerContainer}>
+                <Text style={styles.headerText}>Edit todo</Text>
+            </View>
+
             <View style={styles.inputContainer}>
                 <TextInput
                     style={[styles.input, inputFocus && styles.focusedInput]}
@@ -80,15 +84,8 @@ export default function EditScreen() {
                     onFocus={setInputFocus}
                     onBlur={() => setInputFocus(false)}
                 />
-                {/* <Pressable
-                    onPress={() => setColorScheme(colorScheme === 'light' ? 'dark' : 'light')}
-                    style={{ marginLeft: 10 }}>
-
-                    <Octicons name={colorScheme === 'dark' ? "moon" : "sun"} size={32} color={theme.text} selectable={undefined} style={{ width: 36 }} />
-
-                </Pressable> */}
             </View>
-            <View style={styles.inputContainer}>
+            <View style={styles.buttonsContainer}>
                 <Pressable
                     onPress={handleSave}
                     style={styles.saveButton}
@@ -104,6 +101,7 @@ export default function EditScreen() {
                     <FontAwesome name="close" size={19} color="white" />
                 </Pressable>
             </View>
+
             <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
         </SafeAreaView>
     )
@@ -116,21 +114,34 @@ function createStyles(theme, colorScheme) {
             width: '100%',
             backgroundColor: colorScheme === 'dark' ? '#2e2e2e' : 'white',
         },
+        headerContainer: {
+            marginTop: 12,
+            marginBottom: 18,
+            marginLeft: 12,
+            width: '100%',
+            maxWidth: 1024,
+        },
+        headerText: {
+            fontSize: 24,
+            fontFamily: 'Inter_500Medium',
+            color: theme.text,
+        },
         inputContainer: {
             flexDirection: 'row',
             alignItems: 'center',
-            padding: 10,
-            gap: 6,
-            width: '100%',
+            //padding: 10,
+            marginHorizontal: 10,
+            marginBottom: 18,
+            //borderWidth: 1,
+            //borderColor: 'red',
+            //width: '100%',
             maxWidth: 1024,
-            marginHorizontal: 'auto',
             pointerEvents: 'auto',
         },
         input: {
             flex: 1,
             borderRadius: 4,
             padding: 10,
-            marginRight: 10,
             fontSize: 16,
             fontFamily: 'Inter_500Medium',
             minWidth: 0,
@@ -140,7 +151,17 @@ function createStyles(theme, colorScheme) {
         focusedInput: {
             backgroundColor: colorScheme === 'dark' ? '#1f1f1f' : '#d6d6d6',
         },
+        buttonsContainer: {
+            flexDirection: 'row',
+            width: '100%',
+            //borderWidth: 1,
+            //borderColor: 'red',
+            gap: 14,
+            paddingHorizontal: 10,
+        },
         saveButton: {
+            flex: 1,
+            alignItems: 'center',
             backgroundColor: '#62ff84',
             borderRadius: 4,
             padding: 12,

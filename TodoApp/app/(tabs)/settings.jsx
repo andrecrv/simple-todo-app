@@ -8,8 +8,8 @@ import { Octicons, FontAwesome } from '@expo/vector-icons';
 import { ThemeContext } from "@/context/ThemeContext";
 
 export default function Settinngs() {
-    const [isEnabled, setIsEnabled] = useState(false)
     const { colorScheme, setColorScheme, theme } = useContext(ThemeContext)
+    const [isEnabled, setIsEnabled] = useState(colorScheme === 'dark' ? true : false)
 
     const [loaded, error] = useFonts({
         Inter_500Medium,
@@ -42,7 +42,6 @@ export default function Settinngs() {
                 />
             </View>
 
-
             <StatusBar style={colorScheme === 'dark' ? 'light' : 'dark'} />
         </SafeAreaView>
     );
@@ -62,7 +61,7 @@ function createStyles(theme, colorScheme) {
             maxWidth: 1024,
         },
         headerText: {
-            fontSize: 28,
+            fontSize: 24,
             fontFamily: 'Inter_500Medium',
             color: theme.text,
         },
