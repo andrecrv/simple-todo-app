@@ -18,11 +18,7 @@ This app was developed with:
 ## Screenshots
 Below are the app’s theme variations, highlighting both Light and Dark modes.
 
-<div>
-  <img src="TodoApp/assets/screenshots/light_theme.PNG" width="300" />
-  &nbsp;&nbsp;&nbsp;
-  <img src="TodoApp/assets/screenshots/dark_theme.PNG" width="299" />
-</div>
+![Theme Layouts](TodoApp/assets/screenshots/screenshot_layouts.png)
 
 ## How It Works
 
